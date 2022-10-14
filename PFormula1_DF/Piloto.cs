@@ -25,7 +25,7 @@ namespace PFormula1_DF
         public virtual ICollection<PilotoCarro> PilotoCarroes { get; set; }
         public override string ToString()
         {
-            return $"Nome: {nome} | Id: {id}";
+            return $"Nome: {nome} | Id: {id} \n";
         }
     }
 }

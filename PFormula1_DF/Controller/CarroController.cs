@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PFormula1_DF.Controller
 {
@@ -57,7 +54,7 @@ namespace PFormula1_DF.Controller
                 Console.Clear();
                 Program.PhoneBooksImage();
                 Console.WriteLine("### Edit Carro ###");
-                Console.WriteLine("Informe o nome para consultar os dados do carro: ");
+                Console.WriteLine("Informe o Id do carro para consultar os dados: ");
                 carro.id = int.Parse(Console.ReadLine());
                 var find = context.Carroes.FirstOrDefault(t => t.id == carro.id);
                 if (find != null)
@@ -157,7 +154,7 @@ namespace PFormula1_DF.Controller
             Console.Clear();
             Program.PhoneBooksImage();
             Console.WriteLine("### Consulta de Carros ###");
-            Console.WriteLine("Voce deseja consultar: \n[1] Equipe especifica \n[2] Todas");
+            Console.WriteLine("Voce deseja consultar: \n[1] Carro especifico \n[2] Todos");
             int op = int.Parse(Console.ReadLine());
             while (op < 1 || op > 2)
             {

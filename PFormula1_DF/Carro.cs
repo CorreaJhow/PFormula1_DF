@@ -33,7 +33,7 @@ namespace PFormula1_DF
         public override string ToString()
         {
             return $"Modelo Carro: {modelo} | Id: {id} | Ano: {ano} \n" +
-                $"Unidade: {unidade} | Id Equipe: {id_equipe}";
+                $"Unidade: {unidade} | Id Equipe: {id_equipe}\n";
         }
     }
 }
