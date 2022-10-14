@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="F1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="modelo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ano" Type="int" Nullable="false" />
+          <Property Name="unidade" Type="int" Nullable="false" />
+          <Property Name="id_equipe" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Piloto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PilotoCarro">
+          <Key>
+            <PropertyRef Name="id_piloto" />
+            <PropertyRef Name="id_carro" />
+            <PropertyRef Name="data_evento" />
+          </Key>
+          <Property Name="id_piloto" Type="int" Nullable="false" />
+          <Property Name="id_carro" Type="int" Nullable="false" />
+          <Property Name="data_evento" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Carro_Equipe">
+          <End Role="Equipe" Type="Self.Equipe" Multiplicity="1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="id_equipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PilotoCarro_Carro">
+          <End Role="Carro" Type="Self.Carro" Multiplicity="1" />
+          <End Role="PilotoCarro" Type="Self.PilotoCarro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carro">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PilotoCarro">
+              <PropertyRef Name="id_carro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PilotoCarro_Piloto">
+          <End Role="Piloto" Type="Self.Piloto" Multiplicity="1" />
+          <End Role="PilotoCarro" Type="Self.PilotoCarro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PilotoCarro">
+              <PropertyRef Name="id_piloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="F1ModelStoreContainer">
+          <EntitySet Name="Carro" EntityType="Self.Carro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipe" EntityType="Self.Equipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piloto" EntityType="Self.Piloto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PilotoCarro" EntityType="Self.PilotoCarro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Carro_Equipe" Association="Self.FK_Carro_Equipe">
+            <End Role="Equipe" EntitySet="Equipe" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PilotoCarro_Carro" Association="Self.FK_PilotoCarro_Carro">
+            <End Role="Carro" EntitySet="Carro" />
+            <End Role="PilotoCarro" EntitySet="PilotoCarro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PilotoCarro_Piloto" Association="Self.FK_PilotoCarro_Piloto">
+            <End Role="Piloto" EntitySet="Piloto" />
+            <End Role="PilotoCarro" EntitySet="PilotoCarro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="F1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="modelo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ano" Type="Int32" Nullable="false" />
+          <Property Name="unidade" Type="Int32" Nullable="false" />
+          <Property Name="id_equipe" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipe" Relationship="Self.FK_Carro_Equipe" FromRole="Carro" ToRole="Equipe" />
+          <NavigationProperty Name="PilotoCarroes" Relationship="Self.FK_PilotoCarro_Carro" FromRole="Carro" ToRole="PilotoCarro" />
+        </EntityType>
+        <EntityType Name="Equipe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Carroes" Relationship="Self.FK_Carro_Equipe" FromRole="Equipe" ToRole="Carro" />
+        </EntityType>
+        <EntityType Name="Piloto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PilotoCarroes" Relationship="Self.FK_PilotoCarro_Piloto" FromRole="Piloto" ToRole="PilotoCarro" />
+        </EntityType>
+        <EntityType Name="PilotoCarro">
+          <Key>
+            <PropertyRef Name="id_piloto" />
+            <PropertyRef Name="id_carro" />
+            <PropertyRef Name="data_evento" />
+          </Key>
+          <Property Name="id_piloto" Type="Int32" Nullable="false" />
+          <Property Name="id_carro" Type="Int32" Nullable="false" />
+          <Property Name="data_evento" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Carro" Relationship="Self.FK_PilotoCarro_Carro" FromRole="PilotoCarro" ToRole="Carro" />
+          <NavigationProperty Name="Piloto" Relationship="Self.FK_PilotoCarro_Piloto" FromRole="PilotoCarro" ToRole="Piloto" />
+        </EntityType>
+        <Association Name="FK_Carro_Equipe">
+          <End Role="Equipe" Type="Self.Equipe" Multiplicity="1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="id_equipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PilotoCarro_Carro">
+          <End Role="Carro" Type="Self.Carro" Multiplicity="1" />
+          <End Role="PilotoCarro" Type="Self.PilotoCarro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carro">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PilotoCarro">
+              <PropertyRef Name="id_carro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PilotoCarro_Piloto">
+          <End Role="Piloto" Type="Self.Piloto" Multiplicity="1" />
+          <End Role="PilotoCarro" Type="Self.PilotoCarro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PilotoCarro">
+              <PropertyRef Name="id_piloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="F1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carroes" EntityType="Self.Carro" />
+          <EntitySet Name="Equipes" EntityType="Self.Equipe" />
+          <EntitySet Name="Pilotoes" EntityType="Self.Piloto" />
+          <EntitySet Name="PilotoCarroes" EntityType="Self.PilotoCarro" />
+          <AssociationSet Name="FK_Carro_Equipe" Association="Self.FK_Carro_Equipe">
+            <End Role="Equipe" EntitySet="Equipes" />
+            <End Role="Carro" EntitySet="Carroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PilotoCarro_Carro" Association="Self.FK_PilotoCarro_Carro">
+            <End Role="Carro" EntitySet="Carroes" />
+            <End Role="PilotoCarro" EntitySet="PilotoCarroes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PilotoCarro_Piloto" Association="Self.FK_PilotoCarro_Piloto">
+            <End Role="Piloto" EntitySet="Pilotoes" />
+            <End Role="PilotoCarro" EntitySet="PilotoCarroes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="F1ModelStoreContainer" CdmEntityContainer="F1Entities">
+          <EntitySetMapping Name="Carroes">
+            <EntityTypeMapping TypeName="F1Model.Carro">
+              <MappingFragment StoreEntitySet="Carro">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="ano" ColumnName="ano" />
+                <ScalarProperty Name="unidade" ColumnName="unidade" />
+                <ScalarProperty Name="id_equipe" ColumnName="id_equipe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipes">
+            <EntityTypeMapping TypeName="F1Model.Equipe">
+              <MappingFragment StoreEntitySet="Equipe">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pilotoes">
+            <EntityTypeMapping TypeName="F1Model.Piloto">
+              <MappingFragment StoreEntitySet="Piloto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PilotoCarroes">
+            <EntityTypeMapping TypeName="F1Model.PilotoCarro">
+              <MappingFragment StoreEntitySet="PilotoCarro">
+                <ScalarProperty Name="id_piloto" ColumnName="id_piloto" />
+                <ScalarProperty Name="id_carro" ColumnName="id_carro" />
+                <ScalarProperty Name="data_evento" ColumnName="data_evento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
