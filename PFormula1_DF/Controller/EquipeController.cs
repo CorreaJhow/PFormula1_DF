@@ -65,7 +65,7 @@ namespace PFormula1_DF.Controller
                     switch (opc)
                     {
                         case 1:
-                            Console.WriteLine("Informe o  novo nome para equipe: ");
+                            Console.WriteLine("Informe o novo nome para equipe: ");
                             find.nome = Console.ReadLine().ToLower();          
                             context.Entry(find).State = EntityState.Modified;
                             context.SaveChanges();

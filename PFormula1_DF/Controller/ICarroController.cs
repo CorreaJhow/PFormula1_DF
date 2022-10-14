@@ -12,6 +12,5 @@ namespace PFormula1_DF.Controller
          void EditarCarro();
          void DeletarCarro();
          void ConsultarCarro(); 
-
     }
 }

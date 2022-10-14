@@ -34,15 +34,15 @@ namespace PFormula1_DF
                 case 0:
                     Menu();
                     break;
-                case 1: //cadastroEquipe 
+                case 1: 
                     equipe.CadastrarEquipe();
                     Cadastrar();
                     break;
-                case 2: //Cadstro Piloto
+                case 2: 
                     piloto.CadastrarPiloto();
                     Cadastrar();
                     break;
-                case 3: //Cadastro Carro 
+                case 3: 
                     carro.CadastroCarro();
                     Cadastrar();
                     break;
@@ -76,7 +76,7 @@ namespace PFormula1_DF
                     Editar();
                     break;
                 case 3:
-
+                    carro.EditarCarro();
                     Editar(); 
                     break;
                 default:
@@ -108,8 +108,8 @@ namespace PFormula1_DF
                     piloto.ConsultarPiloto();
                     Consultar();
                     break;
-                case 3: 
-                    
+                case 3:
+                    carro.ConsultarCarro();
                     Consultar();
                     break;
                 default:
@@ -142,7 +142,7 @@ namespace PFormula1_DF
                     Deletar(); 
                     break;
                 case 3:
-
+                    carro.DeletarCarro();
                     Deletar(); 
                     break;
                 default:

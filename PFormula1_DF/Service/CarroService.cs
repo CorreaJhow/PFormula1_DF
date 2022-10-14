@@ -18,8 +18,17 @@ namespace PFormula1_DF.Service
         {
             carroController.CadastroCarro();
         }
-        //void EditarCarro();
-        //void DeletarCarro();
-        //void ConsultarCarro();
+        public void EditarCarro()
+        {
+            carroController.EditarCarro();
+        }
+        public void DeletarCarro()
+        {
+            carroController.DeletarCarro();
+        }
+        public void ConsultarCarro()
+        {
+            carroController.ConsultarCarro();
+        }
     }
 }
