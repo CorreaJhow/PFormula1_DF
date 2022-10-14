@@ -67,9 +67,18 @@ namespace PFormula1_DF
                 case 0:
                     Menu();
                     break;
-                case 1: break;
-                case 2: break;
-                case 3: break;
+                case 1:
+                    equipe.EditarEquipe();
+                    Editar();
+                    break;
+                case 2:
+
+                    Editar();
+                    break;
+                case 3:
+
+                    Editar(); 
+                    break;
                 default:
                     break;
             }

@@ -18,11 +18,17 @@ namespace PFormula1_DF.Service
         {
             _equipeController.CadastrarEquipe();
         }
-        //public void EditarEquipe();
+        public void EditarEquipe()
+        {
+            _equipeController.EditarEquipe();
+        }
         public void ConsultarEquipe()
         {
             _equipeController.ConsultarEquipe();
         }
-        //public void DeletarEquipe();
+        public void DeletarEquipe()
+        {
+            _equipeController.DeletarEquipe();
+        }
     }
 }

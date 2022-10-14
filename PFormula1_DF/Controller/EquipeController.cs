@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Contexts;
@@ -40,7 +42,51 @@ namespace PFormula1_DF.Controller
         }
         public void EditarEquipe()
         {
-            throw new NotImplementedException();
+            var equipe = new Equipe();  
+            using (var context = new F1Entities())
+            {
+                Console.Clear();
+                Program.PhoneBooksImage();
+                Console.WriteLine("### Edit Equipe ###");
+                Console.WriteLine("Informe o nome para consultar os dados de equipe: ");
+                equipe.nome = Console.ReadLine().ToLower();
+                var find = context.Equipes.FirstOrDefault(t => t.nome == equipe.nome);
+                if (find != null)
+                {
+                    Console.WriteLine(find.ToString());
+                    Program.PressContinue();
+                    Console.WriteLine("Voce deseja alterar o nome da equipe? \n[1] Sim \n[2] Não");
+                    int opc = int.Parse(Console.ReadLine());
+                    while(opc < 1 || opc > 2)
+                    {
+                        Console.WriteLine("Opção invalida, informe novamente: ");
+                        opc = int.Parse(Console.ReadLine());
+                    }
+                    switch (opc)
+                    {
+                        case 1:
+                            Console.WriteLine("Informe o  novo nome para equipe: ");
+                            find.nome = Console.ReadLine().ToLower();          
+                            context.Entry(find).State = EntityState.Modified;
+                            context.SaveChanges();
+                            Console.WriteLine("\n### Nome de equipe atualizado! ###");
+                            Console.WriteLine(find.ToString());
+                            Program.PressContinue();
+                            break;
+                        case 2:
+                            Console.WriteLine("Obrigado, retornando ao menu!");
+                            Program.PressContinue();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Registro nao encontrado, volte e tente novamente!!");
+                    Program.PressContinue();
+                }
+            }
         }
         public void ConsultarEquipe()
         {
@@ -102,7 +148,45 @@ namespace PFormula1_DF.Controller
         }
         public void DeletarEquipe()
         {
-            throw new NotImplementedException();
+            var equipe = new Equipe();
+            using (var context = new F1Entities())
+            {
+                Console.Clear();
+                Program.PhoneBooksImage();
+                Console.WriteLine("### Delete ###");
+                Console.WriteLine("Informe o nome para buscar o cadastro: ");
+                equipe.nome = Console.ReadLine().ToLower();
+                var find = context.Equipes.FirstOrDefault(t => t.nome == equipe.nome);
+                if (find != null)
+                {
+                    Console.WriteLine(find.ToString());
+                    Console.WriteLine("Deseja realmente deletar essa equipe? \n[1] Sim \n[2] Não");
+                    int op = int.Parse(Console.ReadLine());
+                    while (op < 1 || op > 2)
+                    {
+                        Console.WriteLine("Opção inválida, informe novamente: ");
+                        op = int.Parse(Console.ReadLine());
+                    }
+                    if (op == 1)
+                    {
+                        context.Entry(find).State = EntityState.Deleted;
+                        context.Equipes.Remove(find);
+                        context.SaveChanges();
+                        Console.WriteLine(" ### Equipe deletada com sucesso! ### \n");
+                        Program.PressContinue();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nOperação cancelada!");
+                        Program.PressContinue();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\n### Contato não encontrado! ###");
+                    Program.PressContinue();
+                }
+            }
         }
     }
 }
