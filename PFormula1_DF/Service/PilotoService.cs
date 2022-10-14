@@ -14,10 +14,21 @@ namespace PFormula1_DF.Service
         {
             _pilotoController = new PilotoController();
         }
-
         public void CadastrarPiloto()
         {
             _pilotoController.CadastrarPiloto();
+        }
+        public void ConsultarPiloto()
+        {
+            _pilotoController.ConsultarPiloto();
+        }
+        public void DeletePiloto()
+        {
+            _pilotoController.DeletePiloto();
+        }
+        public void EditarPiloto()
+        {
+            _pilotoController.EditarPiloto();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace PFormula1_DF
                     Editar();
                     break;
                 case 2:
-
+                    piloto.EditarPiloto();
                     Editar();
                     break;
                 case 3:
@@ -105,7 +105,7 @@ namespace PFormula1_DF
                     Consultar();
                     break;
                 case 2:
-
+                    piloto.ConsultarPiloto();
                     Consultar();
                     break;
                 case 3: 
@@ -138,7 +138,7 @@ namespace PFormula1_DF
                     Deletar();
                     break;
                 case 2:
-
+                    piloto.DeletePiloto();
                     Deletar(); 
                     break;
                 case 3:
