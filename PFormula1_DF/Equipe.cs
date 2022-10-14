@@ -19,13 +19,10 @@ namespace PFormula1_DF
         {
             this.Carroes = new HashSet<Carro>();
         }
-    
         public int id { get; set; }
-        public string nome { get; set; }
-    
+        public string nome { get; set; }   
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carro> Carroes { get; set; }
-
         public override string ToString()
         {
             return $"Equipe: {nome} | Id: {id}";

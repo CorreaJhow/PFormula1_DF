@@ -133,9 +133,18 @@ namespace PFormula1_DF
                 case 0:
                     Menu();
                     break;
-                case 1: break;
-                case 2: break;
-                case 3: break;
+                case 1:
+                    equipe.DeletarEquipe();
+                    Deletar();
+                    break;
+                case 2:
+
+                    Deletar(); 
+                    break;
+                case 3:
+
+                    Deletar(); 
+                    break;
                 default:
                     break;
             }
@@ -198,6 +207,5 @@ namespace PFormula1_DF
             Console.WriteLine("-=-=-=-=-= Pressione alguma tecla para prosseguir -=-=-=-=-=");
             Console.ReadKey();
         }
-
     }
 }

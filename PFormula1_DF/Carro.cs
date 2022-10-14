@@ -29,5 +29,11 @@ namespace PFormula1_DF
         public virtual Equipe Equipe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PilotoCarro> PilotoCarroes { get; set; }
+
+        public override string ToString()
+        {
+            return $"Modelo Carro: {modelo} | Id: {id} | Ano: {ano} \n" +
+                $"Unidade: {unidade} | Id Equipe: {id_equipe}";
+        }
     }
 }
